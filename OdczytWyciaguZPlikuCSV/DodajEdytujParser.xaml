@@ -1,0 +1,82 @@
+﻿<Window Name="dodajEdytujParserView"
+        x:Class="OdczytWyciaguZPlikuCSV.DodajEdytujParser" Visibility="Visible"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DodajEdytujParser" Height="800" Width="1000">
+    <StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="34"/>
+                <ColumnDefinition Width="566"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Content="Lokalizacja pliku wyciągu:"/>
+            <TextBox Name="SciezkaPliku" Grid.Row="0" Grid.Column="1" Width="600" Height="25" VerticalContentAlignment="Center" Text="{Binding Path=SciezkaPlikuCSV}" Grid.ColumnSpan="2" Margin="0,2"/>
+            <Button Name="Wybierz" Grid.Row="0" Grid.Column="3" Width="50" Height="25" HorizontalAlignment="Left" Content="Wybierz" Command="{Binding Path=WybierzPlikCommand}" Margin="0,2"/>
+            <Button Name="PodgladPlikuButton" Grid.Row="2" Grid.Column="1" Width="100" Height="30" HorizontalAlignment="Left" Content="Podgląd pliku" Command="{Binding Path=PodgladPlikuCommand}" Grid.ColumnSpan="2"/>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"  Content="Nazwa parsera:"/>
+            <TextBox Name="NazwaParsera" Grid.Row="1" Grid.Column="1" Height="25" Width="200" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=NazwaParsera}"/>
+            <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right"  Content="Numer wiersza z pierwszą operacją:"/>
+            <TextBox Name="NumerWierszaZPierwszaOperacja" Grid.Row="3" Grid.Column="1" Height="25" Width="40" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=NumerWierszaZPierwszaOperacja}"/>
+            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right"  Content="Separator wierszy:"/>
+            <TextBox Name="SeparatorWierszy" Grid.Row="4" Grid.Column="1" Height="25" Width="40" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Path=SymbolSeparatoraWierszy}"/>
+            <Label Grid.Row="0" Grid.Column="4" HorizontalAlignment="Left"  Content="Numer kolumny:"/>
+            <Label Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right"  Content="Nazwa kontrahenta:"/>
+            <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment="Right"  Content="Rachunek kontrahenta:"/>
+            <Label Grid.Row="3" Grid.Column="3" HorizontalAlignment="Right"  Content="Kwota:"/>
+            <Label Grid.Row="4" Grid.Column="3" HorizontalAlignment="Right"  Content="Data operacji:"/>
+            <Label Grid.Row="5" Grid.Column="3" HorizontalAlignment="Right"  Content="Data księgowania:"/>
+            <Label Grid.Row="6" Grid.Column="3" HorizontalAlignment="Right"  Content="Tytułem:"/>
+            <TextBox Name="NazwaKontrahenta" Grid.Row="1" Grid.Column="4" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Path=NazwaKontrahentaNumerKolumny}"/>
+            <TextBox Name="RachunekKontrahenta" Grid.Row="2" Grid.Column="4" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Path=RachunekKontrahentaNumerKolumny}"/>
+            <TextBox Name="Kwota" Grid.Row="3" Grid.Column="4" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Path=KwotaNumerKolumny}"/>
+            <TextBox Name="DataOperacji" Grid.Row="4" Grid.Column="4" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Path=DataOperacjiNumerKolumny}"/>
+            <TextBox Name="DataKsiegowania" Grid.Row="5" Grid.Column="4" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Path=DataKsiegowaniaNumerKolumny}"/>
+            <TextBox Name="Tytulem" Grid.Row="6" Grid.Column="4" Height="25" Width="40" HorizontalAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Path=TytulemNumerKolumny}"/>
+        </Grid>
+        <DataGrid Name="GRID" ItemsSource="{Binding Path=DataTable}" Height="270" ColumnWidth="150"  RowHeaderWidth="30" CanUserSortColumns="False" IsReadOnly="True" LoadingRow="DataGrid_LoadingRow">
+        </DataGrid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="ZapiszParser" Grid.Row="1" Grid.Column="0" Width="100" HorizontalAlignment="Right" Content="Zapisz parser" Command="{Binding Path=ZapiszParserIZamknijOknoCommand}" CommandParameter="{Binding ElementName=dodajEdytujParserView}"/>
+            <Button Name="Anuluj" Grid.Row="1" Grid.Column="2" Width="100" HorizontalAlignment="Right" Content="Anuluj" Command="{Binding Path=ZamknijOknoCommand}" CommandParameter="{Binding ElementName=dodajEdytujParserView}"/>
+        </Grid>
+    </StackPanel>
+</Window>
