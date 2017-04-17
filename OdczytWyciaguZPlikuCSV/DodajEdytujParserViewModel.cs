@@ -216,20 +216,6 @@ namespace OdczytWyciaguZPlikuCSV
             public List<string> WczytanyPlikDoPodgladu { get; set; } 
             public string NazwaEdytowanegoParsera { get; set; }
             
-  /*          private ParserCSV parserCSV;
-            public ParserCSV ParserCSV
-            {
-                get 
-                {
-                    if (parserCSV == null) parserCSV = StworzParserZAtrybutowWViewModel();
-                    return parserCSV;
-                }
-                set
-                {
-                    parserCSV = value;
-                }
-            }*/
-
         #endregion
 
         #region Commands
