@@ -28,7 +28,7 @@ namespace OdczytWyciaguZPlikuCSV
             public DodajEdytujParserViewModel(string sciezkaPliku, Action<string, List<ParserCSV>> _OdswiezMainWindowViewModel)
             {
                 SciezkaPlikuCSV = sciezkaPliku;
-
+                
                 OdswiezMainWindowViewModel = _OdswiezMainWindowViewModel;
             }
 
@@ -266,7 +266,7 @@ namespace OdczytWyciaguZPlikuCSV
                 List<ParserCSV> listaParserow = OdczytajListeZapisanychParserow();
                 if (!string.IsNullOrEmpty(NazwaEdytowanegoParsera)) listaParserow.Remove(listaParserow.Find(f => f.NazwaParsera==NazwaEdytowanegoParsera));
                 listaParserow.Add(nowyParser);
-                listaParserow = listaParserow.OrderBy(o => o.NazwaParsera).ToList();
+                listaParserow = listaParserow.OrderBy(o => o.NazwaParsera).ToList(); //Think about sorting on XAML level or at least in ViewModel.
                 ZapiszListeParserowDoXml(listaParserow);
                 OdswiezMainWindowViewModel(SciezkaPlikuCSV, listaParserow);
                 (window as Window).Close();
@@ -319,8 +319,6 @@ namespace OdczytWyciaguZPlikuCSV
         }
 
 
-
-
         private List<List<string>> UtworzLogicznaTabliceNaPodstawiePliku()
         {
             if (SciezkaPlikuCSVCache != SciezkaPlikuCSV)
@@ -354,6 +352,7 @@ namespace OdczytWyciaguZPlikuCSV
                 return listaWierszyWczytanegoPliku;
             }
         }
+        //Reconsider to pack DataTable to UserControl and separate to another filer, so in the future it will be simpler to replace it with more sensible control.
         private void StworzDataTableZTablicyLogicznej(List<List<string>> logicznaTablica)
         {
             dataTable = new DataTable();
@@ -378,6 +377,7 @@ namespace OdczytWyciaguZPlikuCSV
             }
         }
 
+        //Add validation in the future
         private ParserCSV StworzParserZAtrybutowWViewModel()
         {
             ParserCSV parser = new ParserCSV();
@@ -421,6 +421,8 @@ namespace OdczytWyciaguZPlikuCSV
         }
     }
 
+    //1. Three below class are model. In the future they will be seperate to another file.
+    //2. In the future add validation to fields in these class.
     public class OperacjaBankowaZCSV
     {
         public string RachunekWlasciciela { get; set; }
