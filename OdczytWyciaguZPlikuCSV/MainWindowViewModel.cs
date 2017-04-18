@@ -42,6 +42,9 @@ namespace OdczytWyciaguZPlikuCSV
             }
         }
 
+        //1. Check if at a present time it can be a simple List<ParserCSV>
+        //2. In future thinking about sorting this list a layer above model. (possible in another place)
+        //3. In future add setting selected item of list to a new added item. (possible in another place)
         private ObservableCollection<ParserCSV> listaParserow;
         public ObservableCollection<ParserCSV> ListaParserow
         {
@@ -153,19 +156,18 @@ namespace OdczytWyciaguZPlikuCSV
                 return listaOdczytanychParserow;
             }
         }
+        
+        public void OdswiezMainWindowViewModel(string _sciezkaPlikuCSV, List<ParserCSV> _listaParserow)
+        {
+            SciezkaPlikuCSV = _sciezkaPlikuCSV;
+            ListaParserow = new ObservableCollection<ParserCSV>(_listaParserow);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChange(string propName)
         {
             if (PropertyChanged != null) this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-
-        }
-
-        public void OdswiezMainWindowViewModel(string _sciezkaPlikuCSV, List<ParserCSV> _listaParserow)
-        {
-            SciezkaPlikuCSV = _sciezkaPlikuCSV;
-            ListaParserow = new ObservableCollection<ParserCSV>(_listaParserow);
-        }
+        }        
     }
 }
