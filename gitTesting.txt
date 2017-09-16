@@ -2,3 +2,4 @@ This is Git testing
 another test
 another
 jakiœ kod
+kolejny kod
