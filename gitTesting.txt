@@ -1,2 +1,2 @@
 This is Git testing
-plapla
+another test
